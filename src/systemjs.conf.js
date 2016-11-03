@@ -11,7 +11,9 @@
     // map tells the System loader where to look for things
     var map = {
         'app': 'src/tmp/app',
-        'test': 'src/tmp/test'
+        'test': 'src/tmp/test',
+
+        'ng2-interceptors': 'node_modules/ng2-interceptors',
     };
 
     // packages tells the System loader how to load when no filename and/or no extension
@@ -24,6 +26,9 @@
         },
         'rxjs': {
             defaultExtension: 'js'
+        },
+        'ng2-interceptors': {
+            main: 'index.js'            
         }
     };
 

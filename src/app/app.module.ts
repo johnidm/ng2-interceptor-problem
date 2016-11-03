@@ -7,6 +7,15 @@ import { NavbarModule } from './shared';
 import { HomeModule } from './home/home.module';
 import { TodolistModule } from './todolist/todolist.module';
 
+import { InterceptorService } from 'ng2-interceptors';
+import { XHRBackend, RequestOptions } from '@angular/http';
+
+export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions) {
+  let service = new InterceptorService(xhrBackend, requestOptions);
+  return service;
+}
+
+
 @NgModule({
     declarations: [
         AppComponent
@@ -17,7 +26,14 @@ import { TodolistModule } from './todolist/todolist.module';
         TodolistModule,
         routing
     ],
-    providers: [ APP_PROVIDERS, appRoutingProviders ],
+    providers: [ APP_PROVIDERS, appRoutingProviders, {
+
+      provide: InterceptorService,
+      useFactory: interceptorFactory,
+      deps: [XHRBackend, RequestOptions]
+    }
+
+    ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule {
